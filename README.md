@@ -52,21 +52,21 @@ Read `app\README.md` for the full usage and safety notes.
 
 ## Build Transparency & Verification
 
-This project is open source, and official Windows `.exe` releases are built publicly through GitHub Actions.
+PC Monitor is open source, and official Windows releases are built publicly through GitHub Actions.
 
-I do **not** manually build the release executable on my own computer and then upload it separately. Instead, the source code in this repository is used by GitHub Actions to automatically build the `.exe`. The final executable is then attached to the GitHub Release along with a SHA-256 checksum file.
-
-This means users can verify that the downloadable `.exe` matches the file produced by the public build process.
-
-### How to verify the release
+The release executable is not manually built on a private computer and uploaded separately. Instead, GitHub Actions checks out the source code from this repository, installs the required Python dependencies, runs the build script, packages the executable, and uploads the final release file to GitHub Releases.
 
 Each official release includes:
 
-- `View-Max.exe` — the Windows executable
-- `SHA256SUMS.txt` — the SHA-256 checksum for the executable
-- A public GitHub Actions build log showing how the executable was created
+- `PCMonitor-windows.zip` — the packaged Windows release
+- `SHA256SUMS.txt` — SHA-256 hashes for the release zip and executable
+- A public GitHub Actions workflow run showing the build process
 
-To verify the downloaded file on Windows, open PowerShell in the folder where the `.exe` was downloaded and run:
+This allows users to verify that the downloaded release matches the file produced by the public GitHub Actions build.
+
+### How to verify the download
+
+After downloading `PCMonitor-windows.zip`, open PowerShell in the folder where the file was downloaded and run:
 
 ```powershell
-Get-FileHash .\View-Max.exe -Algorithm SHA256
+Get-FileHash .\PCMonitor-windows.zip -Algorithm SHA256
