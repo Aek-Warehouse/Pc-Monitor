@@ -65,6 +65,7 @@ jobs:
           } | Add-Content -Encoding ascii SHA256SUMS.txt
 
       - name: Attest build provenance
+        if: github.repository == 'Aek-Warehouse/Pc-Monitor'
         uses: actions/attest-build-provenance@v2
         with:
           subject-path: |
@@ -89,7 +90,7 @@ jobs:
           body: |
             Official PC Monitor Windows release.
 
-            This release was built publicly through GitHub Actions from the source code in this repository.
+            This release was built through GitHub Actions from the source code in this repository.
 
             Included files:
             - PCMonitor-windows.zip
