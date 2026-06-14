@@ -1,0 +1,7 @@
+requests>=2.31,<3
+psutil>=5.9,<8
+mss>=9,<11
+Pillow>=10,<12
+imageio-ffmpeg>=0.5,<1
+tzdata>=2025.2
+PyInstaller>=6.5,<7

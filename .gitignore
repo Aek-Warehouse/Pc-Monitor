@@ -1,0 +1,26 @@
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Local build output
+build/
+dist/
+*.spec
+app/build/
+app/dist/
+app/*.spec
+app/.build_venv/
+
+# Local secrets/config
+config.json
+app/config.json
+pc_status_config.json
+app/pc_status_config.json
+
+# Editor and OS files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+Agent.md

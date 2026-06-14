@@ -1,0 +1,39 @@
+{
+  "regular": {
+    "webhook_url": "https://example.com/regular-status-webhook",
+    "interval_seconds": 300,
+    "capture_mode": "screenshot",
+    "include_cpu": true,
+    "include_ram": true,
+    "include_roblox": true,
+    "include_time": true,
+    "timezone_name": "America/New_York",
+    "time_include_year": true,
+    "time_include_month": true,
+    "time_include_day": true,
+    "time_format": "standard",
+    "clip_length_seconds": 5,
+    "clip_fps": 5
+  },
+  "low_roblox_alert": {
+    "enabled": true,
+    "min_roblox_instances": 20,
+    "profile": {
+      "webhook_url": "https://example.com/low-roblox-alert-webhook",
+      "interval_seconds": 60,
+      "capture_mode": "screenshot",
+      "include_cpu": true,
+      "include_ram": true,
+      "include_roblox": true,
+      "include_time": true,
+      "timezone_name": "America/New_York",
+      "time_include_year": true,
+      "time_include_month": true,
+      "time_include_day": true,
+      "time_format": "standard",
+      "clip_length_seconds": 5,
+      "clip_fps": 5
+    }
+  },
+  "ui_dark_mode": false
+}
