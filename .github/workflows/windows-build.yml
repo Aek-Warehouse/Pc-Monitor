@@ -34,7 +34,7 @@ jobs:
         working-directory: app
         run: python build.py
 
-      - name: Package release files
+      - name: Prepare release files
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Force release | Out-Null
@@ -51,33 +51,27 @@ jobs:
             Copy-Item app\config.example.json release\config.example.json
           }
 
-          Compress-Archive -Path release\* -DestinationPath PCMonitor-windows.zip -Force
-
       - name: Create SHA256 checksums
         shell: pwsh
         run: |
-          Get-FileHash .\PCMonitor-windows.zip -Algorithm SHA256 | ForEach-Object {
-            "$($_.Hash)  PCMonitor-windows.zip"
-          } | Out-File -Encoding ascii SHA256SUMS.txt
-
           Get-FileHash .\release\PCMonitor.exe -Algorithm SHA256 | ForEach-Object {
             "$($_.Hash)  PCMonitor.exe"
-          } | Add-Content -Encoding ascii SHA256SUMS.txt
+          } | Out-File -Encoding ascii SHA256SUMS.txt
 
       - name: Attest build provenance
         if: github.repository == 'Aek-Warehouse/Pc-Monitor'
         uses: actions/attest-build-provenance@v2
         with:
-          subject-path: |
-            PCMonitor-windows.zip
-            release/PCMonitor.exe
+          subject-path: release/PCMonitor.exe
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
           name: PCMonitor-windows
           path: |
-            PCMonitor-windows.zip
+            release/PCMonitor.exe
+            release/README.md
+            release/config.example.json
             SHA256SUMS.txt
 
       - name: Publish GitHub Release
@@ -85,18 +79,22 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            PCMonitor-windows.zip
+            release/PCMonitor.exe
+            release/README.md
+            release/config.example.json
             SHA256SUMS.txt
           body: |
             Official PC Monitor Windows release.
 
-            This release was built through GitHub Actions from the source code in this repository.
+            This release was built publicly through GitHub Actions from the source code in this repository.
 
             Included files:
-            - PCMonitor-windows.zip
+            - PCMonitor.exe
+            - README.md
+            - config.example.json
             - SHA256SUMS.txt
 
-            To verify the download on Windows:
-            Get-FileHash .\PCMonitor-windows.zip -Algorithm SHA256
+            To verify the executable on Windows:
+            Get-FileHash .\PCMonitor.exe -Algorithm SHA256
 
             Compare the result with SHA256SUMS.txt.
